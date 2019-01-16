@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Blog | NORACO{% endblock %}
+
+{% block body %}
+  <h1 class="nbposts">Blog - {{ articles|length }} posts</h1><br>
+
+  {% for article in articles %}
+    <article>
+      <h2 class="title">
+        <a href="{% url 'blog:show' id=article.id slug=article.slug %}">#{{ article.id }} - {{ article.titre|upper }}</a>
+      </h2>
+      <p class="content">{{ article.contenu|truncatewords:6 }}</p>
+      <p>
+        <time class="time" datetime="{{ article.date|date:'Y-m-d' }}">
+          &#x23F0; Posté il y a de cela {{ article.date|timesince }}
+        </time>
+        <strong class="auteur">par {{ article.auteur }}</strong>
+      </p>
+    </article>
+
+  {% empty %}
+    <p>Désolé, pas d'article pour le moment.</p>
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Contacts | NORACO{% endblock %}
+{% block content %}
+  <div class="wrapper" id="form">
+    {% if envoi %}<p class="ok">Votre article a bien été publié !<p>{% endif %}
+    <form action="{% url "blog:contact" %}" method="post">{% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Validez" />
+    </form>
+  </div>
+
+{% endblock %}
